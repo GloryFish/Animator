@@ -1,0 +1,293 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C9FFD21F1428086B00B49DAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FFD21E1428086B00B49DAF /* Cocoa.framework */; };
+		C9FFD2291428086B00B49DAF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9FFD2271428086B00B49DAF /* InfoPlist.strings */; };
+		C9FFD22B1428086B00B49DAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFD22A1428086B00B49DAF /* main.m */; };
+		C9FFD22F1428086B00B49DAF /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C9FFD22D1428086B00B49DAF /* Credits.rtf */; };
+		C9FFD2321428086B00B49DAF /* AnimatorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FFD2311428086B00B49DAF /* AnimatorAppDelegate.m */; };
+		C9FFD2351428086B00B49DAF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9FFD2331428086B00B49DAF /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C9FFD21A1428086B00B49DAF /* Animator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FFD21E1428086B00B49DAF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		C9FFD2211428086B00B49DAF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		C9FFD2221428086B00B49DAF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C9FFD2231428086B00B49DAF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C9FFD2261428086B00B49DAF /* Animator-Info.plist */ = {isa = PBXFileReference; path = "Animator-Info.plist"; sourceTree = "<group>"; };
+		C9FFD2281428086B00B49DAF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C9FFD22A1428086B00B49DAF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C9FFD22C1428086B00B49DAF /* Animator-Prefix.pch */ = {isa = PBXFileReference; path = "Animator-Prefix.pch"; sourceTree = "<group>"; };
+		C9FFD22E1428086B00B49DAF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		C9FFD2301428086B00B49DAF /* AnimatorAppDelegate.h */ = {isa = PBXFileReference; path = AnimatorAppDelegate.h; sourceTree = "<group>"; };
+		C9FFD2311428086B00B49DAF /* AnimatorAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnimatorAppDelegate.m; sourceTree = "<group>"; };
+		C9FFD2341428086B00B49DAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C9FFD2171428086B00B49DAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FFD21F1428086B00B49DAF /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C9FFD20F1428086B00B49DAF = {
+			isa = PBXGroup;
+			children = (
+				C9FFD2241428086B00B49DAF /* Animator */,
+				C9FFD21D1428086B00B49DAF /* Frameworks */,
+				C9FFD21B1428086B00B49DAF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C9FFD21B1428086B00B49DAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFD21A1428086B00B49DAF /* Animator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C9FFD21D1428086B00B49DAF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFD21E1428086B00B49DAF /* Cocoa.framework */,
+				C9FFD2201428086B00B49DAF /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9FFD2201428086B00B49DAF /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFD2211428086B00B49DAF /* AppKit.framework */,
+				C9FFD2221428086B00B49DAF /* CoreData.framework */,
+				C9FFD2231428086B00B49DAF /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		C9FFD2241428086B00B49DAF /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFD2301428086B00B49DAF /* AnimatorAppDelegate.h */,
+				C9FFD2311428086B00B49DAF /* AnimatorAppDelegate.m */,
+				C9FFD2331428086B00B49DAF /* MainMenu.xib */,
+				C9FFD2251428086B00B49DAF /* Supporting Files */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		C9FFD2251428086B00B49DAF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFD2261428086B00B49DAF /* Animator-Info.plist */,
+				C9FFD2271428086B00B49DAF /* InfoPlist.strings */,
+				C9FFD22A1428086B00B49DAF /* main.m */,
+				C9FFD22C1428086B00B49DAF /* Animator-Prefix.pch */,
+				C9FFD22D1428086B00B49DAF /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C9FFD2191428086B00B49DAF /* Animator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9FFD2381428086B00B49DAF /* Build configuration list for PBXNativeTarget "Animator" */;
+			buildPhases = (
+				C9FFD2161428086B00B49DAF /* Sources */,
+				C9FFD2171428086B00B49DAF /* Frameworks */,
+				C9FFD2181428086B00B49DAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Animator;
+			productName = Animator;
+			productReference = C9FFD21A1428086B00B49DAF /* Animator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C9FFD2111428086B00B49DAF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = GloryFish.org;
+			};
+			buildConfigurationList = C9FFD2141428086B00B49DAF /* Build configuration list for PBXProject "Animator" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C9FFD20F1428086B00B49DAF;
+			productRefGroup = C9FFD21B1428086B00B49DAF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C9FFD2191428086B00B49DAF /* Animator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C9FFD2181428086B00B49DAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FFD2291428086B00B49DAF /* InfoPlist.strings in Resources */,
+				C9FFD22F1428086B00B49DAF /* Credits.rtf in Resources */,
+				C9FFD2351428086B00B49DAF /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C9FFD2161428086B00B49DAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FFD22B1428086B00B49DAF /* main.m in Sources */,
+				C9FFD2321428086B00B49DAF /* AnimatorAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C9FFD2271428086B00B49DAF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9FFD2281428086B00B49DAF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C9FFD22D1428086B00B49DAF /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9FFD22E1428086B00B49DAF /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		C9FFD2331428086B00B49DAF /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9FFD2341428086B00B49DAF /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C9FFD2361428086B00B49DAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C9FFD2371428086B00B49DAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C9FFD2391428086B00B49DAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Animator/Animator-Prefix.pch";
+				INFOPLIST_FILE = "Animator/Animator-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C9FFD23A1428086B00B49DAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Animator/Animator-Prefix.pch";
+				INFOPLIST_FILE = "Animator/Animator-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C9FFD2141428086B00B49DAF /* Build configuration list for PBXProject "Animator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FFD2361428086B00B49DAF /* Debug */,
+				C9FFD2371428086B00B49DAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9FFD2381428086B00B49DAF /* Build configuration list for PBXNativeTarget "Animator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FFD2391428086B00B49DAF /* Debug */,
+				C9FFD23A1428086B00B49DAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C9FFD2111428086B00B49DAF /* Project object */;
+}
