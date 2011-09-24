@@ -130,9 +130,9 @@
 				C9FFD2301428086B00B49DAF /* AnimatorAppDelegate.h */,
 				C9FFD2311428086B00B49DAF /* AnimatorAppDelegate.m */,
 				C9FFD2331428086B00B49DAF /* MainMenu.xib */,
-				C9FFD2251428086B00B49DAF /* Supporting Files */,
 				C9FFD26914280B2900B49DAF /* AnimationGroupController.h */,
 				C9FFD26A14280B2900B49DAF /* AnimationGroupController.m */,
+				C9FFD2251428086B00B49DAF /* Supporting Files */,
 			);
 			path = Animator;
 			sourceTree = "<group>";

@@ -22,4 +22,7 @@
 -(void)newAnimation;
 -(void)newFrame:(NSString*)animationName;
 -(NSMutableDictionary*)emptyFrame;
+-(bool)parseFromCode:(NSString*)code;
+-(bool)groupIsValid:(NSDictionary*)group;
+
 @end

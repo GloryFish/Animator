@@ -15,12 +15,13 @@
 @synthesize spritesheet;
 @synthesize spritesheetView;
 @synthesize codeView;
+@synthesize animationSelector;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     animationGroupController = [[AnimationGroupController alloc] init];
     scale = 4;
     [codeView setDelegate:self];
-    [self updateCodeView];
+    [self updateUI];
 }
 
 -(void)dealloc {
@@ -64,6 +65,17 @@
     return NO;
 }
 
+-(void)updateUI {
+    [self updateCodeView];
+    [self updateAnimationSelector];
+}
+
+-(void)updateAnimationSelector {
+    [animationSelector removeAllItems];
+    NSArray* animationNames = [[[animationGroupController animationGroup] objectForKey:@"animations"] allKeys];
+    [animationSelector addItemsWithTitles:animationNames];
+}
+
 -(void)updateCodeView {
     NSAttributedString* code = [[NSAttributedString alloc] initWithString:[animationGroupController code]];
     
@@ -75,17 +87,12 @@
 
 -(IBAction)newGroup:(id)sender {
     [animationGroupController resetAnimationGroup];
-    [self updateCodeView];
+    [self updateUI];
 }
 
 -(IBAction)addAnimation:(id)sender {
     [animationGroupController newAnimation];
-    [self updateCodeView];
-}
-
-// Recieves a JSOn string and attempts to construct a valid
-// AnimationGroup from it. Returns YES on success
--(bool)parseFromCode:(NSString*)code {
+    [self updateUI];
 }
 
 #pragma mark -
@@ -94,6 +101,13 @@
 - (void)textDidChange:(NSNotification *)notification {
     NSLog(@"Notified");
     NSLog(@"%@", [animationGroupController code]);
+    if ([animationGroupController parseFromCode:[[codeView textStorage] string]]) {
+        NSLog(@"Parse successful");
+        [codeView setTextColor:[NSColor blackColor]];
+    } else {
+        NSLog(@"Parse failed");
+        [codeView setTextColor:[NSColor redColor]];
+    }
 }
 
 @end

@@ -16,6 +16,7 @@
     NSImage* spritesheet;
     NSImageView *spritesheetView;
     NSTextView *codeView;
+    NSPopUpButton *animationSelector;
     NSInteger scale;
 }
 
@@ -24,12 +25,16 @@
 @property (assign) IBOutlet NSImage* spritesheet;
 @property (assign) IBOutlet NSImageView *spritesheetView;
 @property (assign) IBOutlet NSTextView *codeView;
+@property (assign) IBOutlet NSPopUpButton *animationSelector;
 
 -(IBAction)chooseSpritesheet:(id)sender;
 -(bool)loadSpritesheet:(NSURL*)url;
+-(void)updateUI;
 -(void)updateCodeView;
+-(void)updateAnimationSelector;
 -(IBAction)newGroup:(id)sender;
 -(IBAction)addAnimation:(id)sender;
+
 
 #pragma mark -
 #pragma mark NSTextView delegate

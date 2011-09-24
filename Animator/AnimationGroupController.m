@@ -82,6 +82,59 @@
     return frame;
 }
 
+// Recieves a JSON string and attempts to construct a valid
+// AnimationGroup from it. Returns YES on success
+-(bool)parseFromCode:(NSString*)code {
+    NSDictionary* group = [code JSONValue];
+    
+    if ([self groupIsValid:group]) {
+        NSMutableDictionary* newGroup = [group mutableCopy];
+        [self setAnimationGroup:newGroup];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(bool)groupIsValid:(NSDictionary*)group {
+    // Make sure it has a spritesheet filename
+    if ([group objectForKey:@"spritesheet"] == nil) {
+        NSLog(@"groupIsValid: no spritesheet");
+        return NO;
+    }
+    
+    // Make sure it has an animations dictionary with one or more items
+    if ([group objectForKey:@"animations"] == nil || 
+        ![[group objectForKey:@"animations"] isKindOfClass:[NSDictionary class]] ||
+        [[group objectForKey:@"animations"] count] == 0) {
+        NSLog(@"groupIsValid: no animations dictionary");
+        return NO;
+    }
+
+    // Loop through all of the animations
+    for (NSString* key in [group objectForKey:@"animations"]) {
+        NSArray* frames = [[group objectForKey:@"animations"] objectForKey:key];
+        if (frames == nil) {
+            NSLog(@"groupIsValid: [%@] frames array is nil", key);
+            return NO;
+        }
+        
+        for (NSDictionary* frame in frames) {
+            if ([frame objectForKey:@"rect"] == nil) {
+                NSLog(@"groupIsValid: [%@] rect is nil", key);
+                return NO;
+            }
+            if ([frame objectForKey:@"duration"] == nil) {
+                NSLog(@"groupIsValid: [%@] duration is nil", key);
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+
+        
 -(void)dealloc {
     [codeWriter release];
 }
