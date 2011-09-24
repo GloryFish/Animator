@@ -7,6 +7,7 @@
 //
 
 #import "SBJson.h"
+#import <Quartz/Quartz.h>
 
 @interface AnimationGroupController : NSObject {
 

@@ -74,8 +74,8 @@
     NSMutableDictionary* rect = [NSMutableDictionary dictionary];
     [rect setObject:[NSNumber numberWithInt:0] forKey:@"x"];
     [rect setObject:[NSNumber numberWithInt:0] forKey:@"y"];
-    [rect setObject:[NSNumber numberWithInt:0] forKey:@"width"];
-    [rect setObject:[NSNumber numberWithInt:0] forKey:@"height"];
+    [rect setObject:[NSNumber numberWithInt:8] forKey:@"width"];
+    [rect setObject:[NSNumber numberWithInt:8] forKey:@"height"];
     
     [frame setObject:rect forKey:@"rect"];
     [frame setObject:[NSNumber numberWithFloat:1.0] forKey:@"duration"];
@@ -119,6 +119,7 @@
             return NO;
         }
         
+        // Ensure frame has valid members and is non-zero
         for (NSDictionary* frame in frames) {
             if ([frame objectForKey:@"rect"] == nil) {
                 NSLog(@"groupIsValid: [%@] rect is nil", key);
@@ -126,6 +127,15 @@
             }
             if ([frame objectForKey:@"duration"] == nil) {
                 NSLog(@"groupIsValid: [%@] duration is nil", key);
+                return NO;
+            }
+            
+            CGRect subRect = CGRectMake([[[frame objectForKey:@"rect"]objectForKey:@"x"] intValue],
+                                        [[[frame objectForKey:@"rect"] objectForKey:@"y"] intValue], 
+                                        [[[frame objectForKey:@"rect"] objectForKey:@"width"] intValue], 
+                                        [[[frame objectForKey:@"rect"] objectForKey:@"height"] intValue]);
+            if (CGSizeEqualToSize(subRect.size, CGSizeZero)) {
+                NSLog(@"groupIsValid: [%@] frame [%@] has size zero", key, NSStringFromRect(subRect));
                 return NO;
             }
         }

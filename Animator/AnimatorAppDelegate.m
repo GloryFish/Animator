@@ -7,6 +7,7 @@
 //
 
 #import "AnimatorAppDelegate.h"
+#import <Foundation/Foundation.h>
 
 @implementation AnimatorAppDelegate
 
@@ -16,6 +17,7 @@
 @synthesize spritesheetView;
 @synthesize codeView;
 @synthesize animationSelector;
+@synthesize animationView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     animationGroupController = [[AnimationGroupController alloc] init];
@@ -93,6 +95,31 @@
 -(IBAction)addAnimation:(id)sender {
     [animationGroupController newAnimation];
     [self updateUI];
+}
+
+- (IBAction)playAnimation:(id)sender {
+    // For now, just show an image of the first frame
+    NSString* animationName = [[animationSelector selectedItem] title];
+    NSLog(@"selectedAnimation: %@",  animationName);
+    
+    // Get first rect
+    NSDictionary* frame = [[[[animationGroupController animationGroup] objectForKey:@"animations"] objectForKey:animationName] objectAtIndex:0];
+    
+    NSLog(@"frame: %@", frame);
+    
+    CGRect subRect = CGRectMake([[frame objectForKey:@"x"] intValue],
+                                [[frame objectForKey:@"y"] intValue], 
+                                [[frame objectForKey:@"width"] intValue], 
+                                [[frame objectForKey:@"height"] intValue]);
+    NSImage* subImage = [[NSImage alloc] initWithSize: subRect.size];
+    [subImage lockFocus];
+    [spritesheet drawAtPoint: NSZeroPoint
+                    fromRect: subRect
+                   operation: NSCompositeCopy
+                    fraction: 1.0f];
+    [subImage unlockFocus];
+    
+    [animationView setImage:subImage];
 }
 
 #pragma mark -
