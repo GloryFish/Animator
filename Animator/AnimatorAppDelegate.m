@@ -18,10 +18,16 @@
 @synthesize codeView;
 @synthesize animationSelector;
 @synthesize animationView;
+@synthesize currentAnimationFrames;
+@synthesize currentAnimationDurations;
+@synthesize loopingCheckbox;
+@synthesize loopAnimation;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     animationGroupController = [[AnimationGroupController alloc] init];
     scale = 4;
+    currentAnimationIndex = 0;
+    loopAnimation = [loopingCheckbox state] == NSOnState;
     [codeView setDelegate:self];
     [self updateUI];
 }
@@ -52,10 +58,6 @@
         spritesheet = s;
         [[self animationGroupController] setSpritesheetFilename:[url lastPathComponent]];
         
-        NSSize size = [spritesheet size];
-        size = NSMakeSize(size.width * scale, size.height * scale);
-        
-        [spritesheet setSize:size];
         [spritesheetView setImage:spritesheet];
         
         [self updateCodeView];
@@ -68,6 +70,10 @@
 }
 
 -(void)updateUI {
+    if ([[animationGroupController spritesheetFilename] isEqualToString:@""]) {
+        [spritesheetView setImage:nil];
+    }
+    
     [self updateCodeView];
     [self updateAnimationSelector];
 }
@@ -98,28 +104,89 @@
 }
 
 - (IBAction)playAnimation:(id)sender {
-    // For now, just show an image of the first frame
+    // Create an array of rects
     NSString* animationName = [[animationSelector selectedItem] title];
-    NSLog(@"selectedAnimation: %@",  animationName);
+
+    NSMutableArray* frameRects = [NSMutableArray array];
+    NSMutableArray* frameDurations = [NSMutableArray array];
     
-    // Get first rect
-    NSDictionary* frame = [[[[animationGroupController animationGroup] objectForKey:@"animations"] objectForKey:animationName] objectAtIndex:0];
+    NSArray* frames = [[[animationGroupController animationGroup] objectForKey:@"animations"] objectForKey:animationName];
+
+    for (NSDictionary* frame in frames) {
+        CGRect subRect = CGRectMake([[[frame objectForKey:@"rect"] objectForKey:@"x"] intValue],
+                                    [[[frame objectForKey:@"rect"] objectForKey:@"y"] intValue], 
+                                    [[[frame objectForKey:@"rect"] objectForKey:@"width"] intValue], 
+                                    [[[frame objectForKey:@"rect"] objectForKey:@"height"] intValue]);
+        [frameRects addObject:[NSValue valueWithRect:subRect]];
+        
+        [frameDurations addObject:[NSNumber numberWithFloat:[[frame objectForKey:@"duration"] floatValue]]];
+    }
     
-    NSLog(@"frame: %@", frame);
+    [self setCurrentAnimationFrames:frameRects];
+    [self setCurrentAnimationDurations:frameDurations];
+    currentAnimationIndex = 0;
     
-    CGRect subRect = CGRectMake([[frame objectForKey:@"x"] intValue],
-                                [[frame objectForKey:@"y"] intValue], 
-                                [[frame objectForKey:@"width"] intValue], 
-                                [[frame objectForKey:@"height"] intValue]);
-    NSImage* subImage = [[NSImage alloc] initWithSize: subRect.size];
+    loopAnimation = YES;
+
+    [self playAnimation];
+}
+
+-(IBAction)stopAnimation:(id)sender {
+    loopAnimation = NO;
+}
+
+
+-(void)playAnimation {
+    NSLog(@"playAnimation: %i", currentAnimationIndex);
+    
+    if ([self currentAnimationFrames] == nil ||
+        [self currentAnimationDurations] == nil) {
+        return;
+    }
+                                           
+    if ([[self currentAnimationFrames] count] == 0) {
+        return;
+    }
+    
+    CGRect frame = [[currentAnimationFrames objectAtIndex:currentAnimationIndex] rectValue];
+
+    [self setAnimationViewWithRect:frame];
+    
+    float duration = [[currentAnimationDurations objectAtIndex:currentAnimationIndex] floatValue];
+    
+    currentAnimationIndex++;
+
+    if (loopAnimation) {
+        NSLog(@"Loop is true");
+    }
+    
+    if (currentAnimationIndex < [[self currentAnimationFrames] count] || loopAnimation) {
+        NSLog(@"Continuing");
+        // Schedule display of next frame
+        [self performSelector:@selector(playAnimation) withObject:nil afterDelay:duration];
+    } 
+    
+    if (currentAnimationIndex == [[self currentAnimationFrames] count]) {
+        // Reset index
+        currentAnimationIndex = 0;
+    }
+}
+
+-(void)setAnimationViewWithRect:(CGRect)rect {
+    [spritesheet setFlipped:YES];
+    NSImage* subImage = [[NSImage alloc] initWithSize:rect.size];
+    [subImage setFlipped:YES];
+    
     [subImage lockFocus];
+    
     [spritesheet drawAtPoint: NSZeroPoint
-                    fromRect: subRect
+                    fromRect: rect
                    operation: NSCompositeCopy
                     fraction: 1.0f];
     [subImage unlockFocus];
     
     [animationView setImage:subImage];
+    [subImage release];
 }
 
 #pragma mark -
@@ -135,6 +202,7 @@
         NSLog(@"Parse failed");
         [codeView setTextColor:[NSColor redColor]];
     }
+    [self updateAnimationSelector];   
 }
 
 @end

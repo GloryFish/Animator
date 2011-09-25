@@ -19,15 +19,23 @@
     NSPopUpButton *animationSelector;
     NSImageView *animationView;
     NSInteger scale;
+    NSArray* currentAnimationFrames;
+    NSArray* currentAnimationDurations;
+    int currentAnimationIndex;
+    bool loopAnimation;
 }
 
 @property (assign) IBOutlet NSWindow* window;
-@property (assign) AnimationGroupController* animationGroupController;
+@property (retain) AnimationGroupController* animationGroupController;
 @property (assign) IBOutlet NSImage* spritesheet;
 @property (assign) IBOutlet NSImageView *spritesheetView;
 @property (assign) IBOutlet NSTextView *codeView;
 @property (assign) IBOutlet NSPopUpButton *animationSelector;
 @property (assign) IBOutlet NSImageView *animationView;
+@property (retain) NSArray* currentAnimationFrames;
+@property (retain) NSArray* currentAnimationDurations;
+@property (assign) IBOutlet NSButton *loopingCheckbox;
+@property (assign) bool loopAnimation;
 
 -(IBAction)chooseSpritesheet:(id)sender;
 -(bool)loadSpritesheet:(NSURL*)url;
@@ -37,7 +45,9 @@
 -(IBAction)newGroup:(id)sender;
 -(IBAction)addAnimation:(id)sender;
 -(IBAction)playAnimation:(id)sender;
-
+-(void)setAnimationViewWithRect:(CGRect)rect;
+-(IBAction)stopAnimation:(id)sender;
+-(void)playAnimation;
 
 #pragma mark -
 #pragma mark NSTextView delegate

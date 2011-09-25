@@ -19,6 +19,7 @@
 
 -(void)resetAnimationGroup;
 -(void)setSpritesheetFilename:(NSString*)filename;
+-(NSString*)spritesheetFilename;
 -(NSString*)code;
 -(void)newAnimation;
 -(void)newFrame:(NSString*)animationName;

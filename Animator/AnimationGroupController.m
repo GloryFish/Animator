@@ -50,6 +50,10 @@
     [[self animationGroup] setObject:filename forKey:@"spritesheet"];
 }
 
+-(NSString*)spritesheetFilename {
+    return [animationGroup objectForKey:@"spritesheet"];
+}
+
 // Return a text representation of the AnimationGroup
 -(NSString*)code {
     return [codeWriter stringWithObject:animationGroup];
@@ -65,7 +69,7 @@
 }
 
 -(void)newFrame:(NSString*)animationName {
-    
+    NSLog(@"newFrame: not implemented");
 }
 
 -(NSMutableDictionary*)emptyFrame {
