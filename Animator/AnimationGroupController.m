@@ -69,7 +69,12 @@
 }
 
 -(void)newFrame:(NSString*)animationName {
-    NSLog(@"newFrame: not implemented");
+    if ([[animationGroup objectForKey:@"animations"] objectForKey:animationName] == nil) {
+        NSLog(@"newFrame: %@ is not a valid animation", animationName);
+        return;
+    }
+    
+    [[[animationGroup objectForKey:@"animations"] objectForKey:animationName] addObject:[self emptyFrame]];
 }
 
 -(NSMutableDictionary*)emptyFrame {

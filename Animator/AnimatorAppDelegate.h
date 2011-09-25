@@ -19,6 +19,7 @@
     NSPopUpButton *animationSelector;
     NSImageView *animationView;
     NSInteger scale;
+    NSString* currentAnimationName;
     NSArray* currentAnimationFrames;
     NSArray* currentAnimationDurations;
     int currentAnimationIndex;
@@ -32,9 +33,11 @@
 @property (assign) IBOutlet NSTextView *codeView;
 @property (assign) IBOutlet NSPopUpButton *animationSelector;
 @property (assign) IBOutlet NSImageView *animationView;
+@property (retain) NSString* currentAnimationName;
 @property (retain) NSArray* currentAnimationFrames;
 @property (retain) NSArray* currentAnimationDurations;
 @property (assign) IBOutlet NSButton *loopingCheckbox;
+- (IBAction)animationSelectorChanged:(id)sender;
 @property (assign) bool loopAnimation;
 
 -(IBAction)chooseSpritesheet:(id)sender;
@@ -44,6 +47,7 @@
 -(void)updateAnimationSelector;
 -(IBAction)newGroup:(id)sender;
 -(IBAction)addAnimation:(id)sender;
+-(IBAction)addFrame:(id)sender;
 -(IBAction)playAnimation:(id)sender;
 -(void)setAnimationViewWithRect:(CGRect)rect;
 -(IBAction)stopAnimation:(id)sender;

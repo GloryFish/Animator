@@ -18,6 +18,7 @@
 @synthesize codeView;
 @synthesize animationSelector;
 @synthesize animationView;
+@synthesize currentAnimationName;
 @synthesize currentAnimationFrames;
 @synthesize currentAnimationDurations;
 @synthesize loopingCheckbox;
@@ -78,9 +79,20 @@
 }
 
 -(void)updateAnimationSelector {
+    [self setCurrentAnimationName:[[animationSelector selectedItem] title]];
+    
     [animationSelector removeAllItems];
     NSArray* animationNames = [[[animationGroupController animationGroup] objectForKey:@"animations"] allKeys];
     [animationSelector addItemsWithTitles:animationNames];
+
+    // Check to see if 
+    if ([animationSelector itemWithTitle:currentAnimationName] != nil) {
+        [animationSelector selectItemWithTitle:currentAnimationName];
+    } else {
+        NSString* aTitle = [[[animationGroupController animationGroup] objectForKey:@"animations"] anyObject];
+        [self setCurrentAnimationName:aTitle];
+        [animationSelector selectItemWithTitle:currentAnimationName];
+    }
 }
 
 -(void)updateCodeView {
@@ -99,6 +111,12 @@
 
 -(IBAction)addAnimation:(id)sender {
     [animationGroupController newAnimation];
+    [self updateUI];
+}
+
+- (IBAction)addFrame:(id)sender {
+    NSString* animation = [[animationSelector selectedItem] title];
+    [animationGroupController newFrame:animation];
     [self updateUI];
 }
 
@@ -132,6 +150,7 @@
 
 -(IBAction)stopAnimation:(id)sender {
     loopAnimation = NO;
+    [AnimatorAppDelegate cancelPreviousPerformRequestsWithTarget:self];
 }
 
 
@@ -198,6 +217,11 @@
     
     // TODO...
     
+}
+
+- (IBAction)animationSelectorChanged:(id)sender {
+    [self setCurrentAnimationName:[[animationSelector selectedItem] title]];
+    [self stopAnimation:sender];
 }
 
 #pragma mark -
