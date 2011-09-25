@@ -37,9 +37,11 @@
 @property (retain) NSArray* currentAnimationFrames;
 @property (retain) NSArray* currentAnimationDurations;
 @property (assign) IBOutlet NSButton *loopingCheckbox;
-- (IBAction)animationSelectorChanged:(id)sender;
 @property (assign) bool loopAnimation;
 
+-(IBAction)animationSelectorChanged:(id)sender;
+-(IBAction)openAnimationFile:(id)sender;
+-(bool)loadAnimationFile:(NSURL*)url;
 -(IBAction)chooseSpritesheet:(id)sender;
 -(bool)loadSpritesheet:(NSURL*)url;
 -(void)updateUI;

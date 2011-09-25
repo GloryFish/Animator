@@ -52,6 +52,44 @@
     }
 }
 
+- (IBAction)openAnimationFile:(id)sender {
+    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+    
+    [openPanel setCanChooseFiles:YES];
+    [openPanel setAllowsMultipleSelection:NO];
+    [openPanel setAllowedFileTypes:[NSArray arrayWithObjects:@"ani", nil]];
+    
+    if ( [openPanel runModal] == NSOKButton ) {
+        NSArray* urls = [openPanel URLs];
+        NSLog(@"urls: %@", urls);
+        if ([urls count] > 0) {
+            [self loadAnimationFile:[urls objectAtIndex:0]];
+        }
+    }
+
+}
+
+-(bool)loadAnimationFile:(NSURL*)url {
+    NSError *error = nil;
+    NSString* animationCode = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    if (animationCode) {
+        if ([animationGroupController parseFromCode:animationCode]) {
+            [codeView setString:animationCode];
+            
+            NSString* spritesheetFilename = [[animationGroupController animationGroup] objectForKey:@"spritesheet"];
+            
+            NSURL* spritesheetURL = [[url URLByDeletingLastPathComponent] URLByAppendingPathComponent:spritesheetFilename];
+            
+            [self loadSpritesheet:spritesheetURL];
+            [self updateUI];
+            return YES;
+        }
+        
+    }
+
+    return NO;
+}
+
 -(bool)loadSpritesheet:(NSURL *)url {
     NSImage* s = [[NSImage alloc] initWithContentsOfURL:url];
     
@@ -89,7 +127,7 @@
     if ([animationSelector itemWithTitle:currentAnimationName] != nil) {
         [animationSelector selectItemWithTitle:currentAnimationName];
     } else {
-        NSString* aTitle = [[[animationGroupController animationGroup] objectForKey:@"animations"] anyObject];
+        NSString* aTitle = [[[[animationGroupController animationGroup] objectForKey:@"animations"] allKeys] objectAtIndex:0];
         [self setCurrentAnimationName:aTitle];
         [animationSelector selectItemWithTitle:currentAnimationName];
     }
@@ -106,6 +144,8 @@
 
 -(IBAction)newGroup:(id)sender {
     [animationGroupController resetAnimationGroup];
+    [AnimatorAppDelegate cancelPreviousPerformRequestsWithTarget:self];
+    [animationView setImage:nil];
     [self updateUI];
 }
 
@@ -239,5 +279,6 @@
     }
     [self updateAnimationSelector];   
 }
+
 
 @end
