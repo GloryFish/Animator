@@ -55,9 +55,8 @@
     NSImage* s = [[NSImage alloc] initWithContentsOfURL:url];
     
     if ([s isValid]) {
-        spritesheet = s;
+        [self setSpritesheet:s];
         [[self animationGroupController] setSpritesheetFilename:[url lastPathComponent]];
-        
         [spritesheetView setImage:spritesheet];
         
         [self updateCodeView];
@@ -156,12 +155,7 @@
     
     currentAnimationIndex++;
 
-    if (loopAnimation) {
-        NSLog(@"Loop is true");
-    }
-    
-    if (currentAnimationIndex < [[self currentAnimationFrames] count] || loopAnimation) {
-        NSLog(@"Continuing");
+    if ([currentAnimationFrames count] > 1 && (currentAnimationIndex < [[self currentAnimationFrames] count] || loopAnimation)) {
         // Schedule display of next frame
         [self performSelector:@selector(playAnimation) withObject:nil afterDelay:duration];
     } 
@@ -173,20 +167,37 @@
 }
 
 -(void)setAnimationViewWithRect:(CGRect)rect {
+    // Setting flippe dis required for correct frame coordinates
     [spritesheet setFlipped:YES];
     NSImage* subImage = [[NSImage alloc] initWithSize:rect.size];
     [subImage setFlipped:YES];
     
-    [subImage lockFocus];
     
+    // Draw the individual frame to an NSImage
+    [subImage lockFocus];
     [spritesheet drawAtPoint: NSZeroPoint
                     fromRect: rect
                    operation: NSCompositeCopy
                     fraction: 1.0f];
     [subImage unlockFocus];
     
-    [animationView setImage:subImage];
+    
+    // Now composite the individual frame to a scaled up image using NSImageInterpolationNone so we get nice clean lines
+    NSImage* scaledImage = [[NSImage alloc] initWithSize:NSMakeSize(subImage.size.width * scale, subImage.size.height * scale)];
+    
+    [scaledImage lockFocus];
+	[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
+	[subImage setSize:scaledImage.size];
+	[subImage compositeToPoint:NSZeroPoint operation:NSCompositeCopy];
+    [scaledImage unlockFocus];
+    
+    [animationView setImage:scaledImage];
     [subImage release];
+    
+    // Draw an outline around the current frame
+    
+    // TODO...
+    
 }
 
 #pragma mark -
